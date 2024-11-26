@@ -1,5 +1,5 @@
 ---
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 import mdjImage from "../img/mdj.avif";
 ---
 
@@ -29,13 +29,13 @@ import mdjImage from "../img/mdj.avif";
   </head>
 
   <body class="dark:bg-neutral-950 bg-sky-100 flex flex-col min-h-screen">
-    <nav x-data="{ open: false }" class="sticky top-0 z-10 bg-sky-100 dark:bg-sky-900 bg-opacity-80 dark:bg-opacity-80 backdrop-blur-md">
+    <nav x-data="{ open: false }" :class="{ 'dark:bg-neutral-900 bg-sky-100 bg-opacity-100 dark:bg-opacity-100': open}" class="sticky top-0 z-50 bg-sky-100 dark:bg-sky-900 bg-opacity-80 dark:bg-opacity-80 backdrop-blur-md">
       <div class="px-4 mx-auto max-w-screen-xl sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <div class="md:flex md:items-center md:gap-12">
             <a href="https://mdjwaterville.ca/" class="text-xl sm:text-2xl font-semibold dark:text-neutral-300 text-black hover:text-black/60 hover:dark:text-neutral-300/80 transition">MDJ Waterville</a>
           </div>
-          <ul :class="{ 'fixed inset-0 top-16 dark:bg-gray-200 flex flex-col items-center justify-center space-y-8 z-20': open, 'hidden': !open }" class="hidden md:flex md:flex-row md:gap-4">
+          <ul :class="{ 'dark:bg-neutral-900 bg-sky-100 fixed inset-x-0 top-full flex flex-col items-center justify-center z-40 min-h-screen': open, 'hidden': !open }" class="hidden md:flex md:flex-row md:gap-4">
             <li>
               <a href="/" class="dark:text-neutral-300 text-black hover:text-black/60 font-bold text-lg transition hover:dark:text-neutral-300/80">Acceuil</a>
             </li>
