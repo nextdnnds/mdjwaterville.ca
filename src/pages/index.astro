@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import mdjImage from "../img/mdj.avif";
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -147,10 +148,11 @@ import mdjImage from "../img/mdj.avif";
         </div>
       </div>
       <div class="bg-sky-200 dark:bg-sky-900 p-6 text-center text-sm dark:text-sky-100 text-black">
-        <p>
-          &copy; <a href="https://mdjwaterville.ca" class="underline transition hover:text-black/60 hover:dark:text-sky-100/80">mdjwaterville.ca</a>. Tous droits réservés. &#x007C; Propulsé par <a href="https://z0x.ca" target="_blank" class="underline transition hover:text-black/60 dark:hover:dark:text-sky-100/80">z0x</a>
-        </p>
+        <p>&copy; <span id="footer-year">{year}</span> <a href="https://mdjwaterville.ca" class="underline transition hover:text-black/60 hover:dark:text-sky-100/80">mdjwaterville.ca</a>. &#x007C; Propulsé par <a href="https://z0x.ca" target="_blank" class="underline transition hover:text-black/60 dark:hover:dark:text-sky-100/80">z0x</a> et <a href="https://linformatiquesimplifie.ca" target="_blank" class="underline transition hover:text-black/60 dark:hover:dark:text-sky-100/80">L'informatique simplifié</a></p>
       </div>
     </footer>
+    <script is:inline>
+      document.getElementById("footer-year").innerText = new Date().getFullYear();
+    </script>
   </body>
 </html>
