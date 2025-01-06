@@ -1,0 +1,37 @@
+name: update dependencies
+on:
+  schedule:
+    - cron: '@daily'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  update-deps:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup bun.sh
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Update dependencies
+        run: |
+          bun update
+          bun install
+
+      - name: Commit updates
+        run: |
+          git config user.name "gitea-actions[bot]"
+          git config user.email "gitea-actions[bot]@git.z0x.ca"
+          git add .
+          if git diff --staged --quiet; then
+            echo "No updates avalable"
+          else
+            git commit -m "chore(deps): bump dependencies"
+            git push
+          fi

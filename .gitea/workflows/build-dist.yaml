@@ -1,0 +1,32 @@
+name: build dist
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-dist:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup bun.sh
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Update dependencies
+        run: |
+          bun install
+          bun run build
+
+      - name: Commit updates
+        run: |
+          git config user.name "gitea-actions[bot]"
+          git config user.email "gitea-actions[bot]@git.z0x.ca"
+          git add -f dist
+          git commit -m "ci(dist): build dist"
+          git push
